@@ -11,32 +11,32 @@ export const useShoppingCart = () => {
     }) => {
         setShoppingCart(oldShoppingCart => {
 
-            const productIncart: ProductInCart = oldShoppingCart[product.id] || {...product, count: 0};
+            // const productIncart: ProductInCart = oldShoppingCart[product.id] || {...product, count: 0};
 
-            if (Math.max(productIncart.count + count, 0) > 0) {
-                productIncart.count += count;
-                return {
-                    ...oldShoppingCart,
-                    [product.id]: productIncart
-                }
+            // if (Math.max(productIncart.count + count, 0) > 0) {
+            //     productIncart.count += count;
+            //     return {
+            //         ...oldShoppingCart,
+            //         [product.id]: productIncart
+            //     }
+            // }
+
+            // const { [product.id]: toDelete, ...rest } = oldShoppingCart;
+            // return rest;
+
+
+            if (count === 0) {
+
+                const { [product.id]: toDelete, ...rest } = oldShoppingCart;
+                return rest;
             }
 
-            const { [product.id]: toDelete, ...rest } = oldShoppingCart;
-            return rest;
-
-
-            // if (count === 0) {
-
-            //     const { [product.id]: toDelete, ...rest } = oldShoppingCart;
-            //     return rest;
-            // }
-
-            // const newShoppingCart = { ...oldShoppingCart };
-            // newShoppingCart[product.id] = {
-            //     ...product,
-            //     count
-            // }
-            // return newShoppingCart;
+            const newShoppingCart = { ...oldShoppingCart };
+            newShoppingCart[product.id] = {
+                ...product,
+                count
+            }
+            return newShoppingCart;
         });
     }
 
